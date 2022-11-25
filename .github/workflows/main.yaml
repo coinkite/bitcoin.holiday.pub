@@ -1,4 +1,4 @@
-name: QaFramework Trigger
+name: Trigger repo
 on:
   push:
     branches: [test]
