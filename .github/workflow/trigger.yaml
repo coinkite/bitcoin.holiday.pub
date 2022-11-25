@@ -1,0 +1,15 @@
+name: QaFramework Trigger
+on:
+  push:
+    branches: [test]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Submodule
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{secrets.ACTIONS_TOKEN}}
+          repository: coinkite/bitcoin.holiday
+          event-type: git_action
