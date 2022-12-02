@@ -8,8 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger build in site repo
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.GH_PRIVATE_REPO_ACCESS_TOKEN }}
-          repository: bitcoinlulz/bitcoin.holiday
-          event-type: git_action
+        env:
+          REPO: bitcoinlulz/bitcoin.holiday
+          WORKFLOW_FILENAME: git_action.yaml
+        run: |
+          curl -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ secrets.GH_PRIVATE_REPO_ACCESS_TOKEN }}" \
+            "https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILENAME}/dispatches" \
+            -d '{ "ref": "main" }'
