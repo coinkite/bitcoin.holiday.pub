@@ -1,7 +1,8 @@
-name: Trigger repo
+name: Trigger site build
 on:
   push:
-    branches: [test]
+    branches:
+      - main
 
 jobs:
   build:
